@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "This repository contains the source code from the Playwright udemy course.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test" : "npx playwright test /tests/e2e.spec.js  --debug"   
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
