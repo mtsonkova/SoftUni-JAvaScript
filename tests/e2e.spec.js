@@ -5,7 +5,7 @@ const host = 'https://rahulshettyacademy.com/client';
 const email = 'samgreen@qa.com';
 const password = 'Qa_Password1';
 
-test('E2E test', async ({ page }) => {
+test('Purchase all products', async ({ page }) => {
     await page.goto(host);
 
     //Login page form
@@ -27,11 +27,12 @@ test('E2E test', async ({ page }) => {
     await products.nth(i)
     .locator('button')
     .locator('text=Add To Cart')
-    .click();
-    
-    
-    
-   
-   
+    .click();     
    }
+
+   // click on cart icon
+
+   await page.getByRole('button', {name: 'Cart'}).first().click();
+    
+
 });
