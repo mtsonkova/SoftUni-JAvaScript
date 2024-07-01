@@ -34,5 +34,7 @@ test('Purchase all products', async ({ page }) => {
 
    await page.getByRole('button', {name: 'Cart'}).first().click();
     
+   // get all elements in cart
+   
 
 });
