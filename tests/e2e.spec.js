@@ -41,10 +41,9 @@ test('Purchase all products', async ({ page }) => {
 
    let cartProducts = await page.locator('.cartSection h3');
    
-   await expect(cartProducts).toHaveCount(3,{timeout:5000});
+   await expect(cartProducts).toHaveCount(size,{timeout:5000});
 
    
-
    let cartProductsTitles = await cartProducts.allTextContents();
 
 
