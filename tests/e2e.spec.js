@@ -4,6 +4,7 @@ const { test, expect } = require('@playwright/test');
 const host = 'https://rahulshettyacademy.com/client';
 const email = 'samgreen@qa.com';
 const password = 'Qa_Password1';
+const expectedProductsTitles = ['ZARA COAT 3', 'ADIDAS ORIGINAL', 'IPHONE 13 PRO'];
 
 test('Purchase all products', async ({ page }) => {
     await page.goto(host);
@@ -27,14 +28,27 @@ test('Purchase all products', async ({ page }) => {
     await products.nth(i)
     .locator('button')
     .locator('text=Add To Cart')
-    .click();     
+    .click();         
+    page.waitForLoadState('domcontentloaded');
    }
 
+   
    // click on cart icon
 
    await page.getByRole('button', {name: 'Cart'}).first().click();
-    
+   page.waitForLoadState('domcontentloaded');
    // get all elements in cart
+
+   let cartProducts = await page.locator('.cartSection h3');
+   
+   await expect(cartProducts).toHaveCount(3,{timeout:5000});
+
    
 
+   let cartProductsTitles = await cartProducts.allTextContents();
+
+
+   console.log(cartProductsTitles);
+   
+   
 });
