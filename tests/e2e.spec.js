@@ -38,6 +38,9 @@ test('Purchase one product', async ({ page }) => {
     expect(isElementPresentInCart).toBeTruthy();
 
     await page.locator('text = Checkout').click();
+
+    //ToDo
+    //select payment method and fill credit card details
     await page.locator('[placeholder*="Country"]').pressSequentially('ind');
     const dropdown = await page.locator('.ta-results');
     await dropdown.waitFor();
@@ -50,6 +53,9 @@ test('Purchase one product', async ({ page }) => {
             break;
         }
     }
+
+    //how to take screenshots in playwright
+    await page.screenshot({path: 'screenshot.png'});
 })
 
 
