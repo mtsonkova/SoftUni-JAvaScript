@@ -54,8 +54,11 @@ test('Purchase one product', async ({ page }) => {
         }
     }
 
-    //how to take screenshots in playwright
+    //how to take screenshots on the entire page in playwright
     await page.screenshot({path: 'screenshot.png'});
+
+    // how to take screenshot of particular element only
+    await page.locator('displayed-text').screenshot({path: 'scrrenshot.png'});
 })
 
 
