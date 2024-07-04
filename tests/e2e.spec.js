@@ -6,6 +6,24 @@ const email = 'samgreen@qa.com';
 const password = 'Qa_Password1';
 const expectedProductsTitles = ['ZARA COAT 3', 'ADIDAS ORIGINAL', 'IPHONE 13 PRO'];
 
+test('Purchase one product', async ({ page }) => {
+    await page.goto(host);
+
+    //Login page form
+    await page.locator('#userEmail').fill(email);
+    await page.locator('#userPassword').fill(password);
+    await page.click('#login');
+    await page.waitForLoadState('networkidle');
+
+    //add product to shoping cart
+
+    const products = await page.locator('.card-body');
+
+    const titles = await page.locator('.card-body b').allTextContents();
+    
+   
+})
+
 test('Purchase all products', async ({ page }) => {
     await page.goto(host);
 
