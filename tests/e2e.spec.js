@@ -30,7 +30,14 @@ test('Purchase one product', async ({ page }) => {
         }
     }
 
-    await page.pause();
+    await page.locator('[routerlink*="cart"]').click(); 
+
+    page.locator('div li').first().waitFor();
+    const isElementPresentInCart = await page.locator('h3:has-text("ZARA COAT 3")').isVisible();
+
+    expect(isElementPresentInCart).toBeTruthy();
+
+    
     
    
 })
