@@ -37,9 +37,19 @@ test('Purchase one product', async ({ page }) => {
 
     expect(isElementPresentInCart).toBeTruthy();
 
-    
-    
-   
+    await page.locator('text = Checkout').click();
+    await page.locator('[placeholder*="Country"]').pressSequentially('ind');
+    const dropdown = await page.locator('.ta-results');
+    await dropdown.waitFor();
+
+    const numOfButtons = await dropdown.locator('button').count();
+
+    for(let i = 0; i < numOfButtons; i++) {
+        if(await dropdown.locator('button').nth(i).textContent() === ' Indonesia') {
+            await dropdown.locator('button').nth(i).click();
+            break;
+        }
+    }
 })
 
 
