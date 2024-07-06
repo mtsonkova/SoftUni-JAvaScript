@@ -6,7 +6,7 @@ const email = 'samgreen@qa.com';
 const password = 'Qa_Password1';
 const expectedProductsTitles = ['ZARA COAT 3', 'ADIDAS ORIGINAL', 'IPHONE 13 PRO'];
 const expectedProduct = 'ZARA COAT 3';
-const text = "THANKYOU FOR THE ORDER."
+const text = " Thankyou for the order. "
 
 test('Purchase one product', async ({ page }) => {
     await page.goto(host);
@@ -92,20 +92,41 @@ await page.click('text =Place Order');
 //get h1 text
 let msg = await page.locator('h1').first().textContent();
 
-expect(msg).toEqual(test);
+await expect(msg).toEqual(text);
 
 let finalPageTitle = await page.locator('.box').first();
 let orderIdRow = await finalPageTitle.locator('tr').last();
-let orderId = await orderIdRow.locator('td').textContent();
+let orderText = await orderIdRow.locator('td').textContent();
+let orderId = orderText?.split('|').filter(element => element.length > 1).toString().trim();
 
-console.log(orderId);
+//click on orders btn
+let navButtons = await page.locator('button.btn-custom');
+await navButtons.nth(1).click();
+let hasOrderId = false;
+
+let th = await page.locator('tbody tr th');
+await th.first().waitFor();
+let thCount = await th.count();
+
+for(let i = 0; i < thCount; i++) {
+    let currentOrderId = await th.nth(i).textContent();
+    if(currentOrderId === orderId) {
+        hasOrderId = true;
+        break;
+    }
+}
+
+expect(hasOrderId).toBeTruthy();
+
+
+
 
 
     //how to take screenshots on the entire page in playwright
-    await page.screenshot({ path: 'screenshot.png' });
+   // await page.screenshot({ path: 'screenshot.png' });
 
     // how to take screenshot of particular element only
-    await page.locator('displayed-text').screenshot({ path: 'scrrenshot.png' });
+  //  await page.locator('displayed-text').screenshot({ path: 'scrrenshot.png' });
 })
 
 
