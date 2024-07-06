@@ -105,6 +105,8 @@ await navButtons.nth(1).click();
 let hasOrderId = false;
 
 let th = await page.locator('tbody tr th');
+let tr = await page.locator('tbody tr');
+let currentIndex = 0;
 await th.first().waitFor();
 let thCount = await th.count();
 
@@ -112,11 +114,25 @@ for(let i = 0; i < thCount; i++) {
     let currentOrderId = await th.nth(i).textContent();
     if(currentOrderId === orderId) {
         hasOrderId = true;
+        currentIndex = i;
         break;
     }
 }
 
-expect(hasOrderId).toBeTruthy();
+await expect(hasOrderId).toBeTruthy();
+// click on view button
+await tr.nth(currentIndex).getByRole('button').first().click();
+
+//TODO Check if OrderID on this row equals
+
+let title = await page.locator('div.email-title').textContent();
+await expect(title).toEqual(' order summary ');
+
+let orderIdOrderSummary = await page.locator('div.col-text').first().textContent();
+
+await expect(orderIdOrderSummary).toEqual(orderId);
+
+
 
 
 
