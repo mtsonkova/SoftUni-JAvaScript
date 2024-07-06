@@ -6,6 +6,7 @@ const email = 'samgreen@qa.com';
 const password = 'Qa_Password1';
 const expectedProductsTitles = ['ZARA COAT 3', 'ADIDAS ORIGINAL', 'IPHONE 13 PRO'];
 const expectedProduct = 'ZARA COAT 3';
+const text = "THANKYOU FOR THE ORDER."
 
 test('Purchase one product', async ({ page }) => {
     await page.goto(host);
@@ -32,10 +33,10 @@ test('Purchase one product', async ({ page }) => {
 
     await page.locator('[routerlink*="cart"]').click();
 
-    page.locator('div li').first().waitFor();
+   await page.locator('div li').first().waitFor();
     const isElementPresentInCart = await page.locator('h3:has-text("ZARA COAT 3")').isVisible();
-
-    expect(isElementPresentInCart).toBeTruthy();
+   
+    await expect(isElementPresentInCart).toBeTruthy();
 
     await page.locator('text = Checkout').click();
 
@@ -47,33 +48,34 @@ test('Purchase one product', async ({ page }) => {
 
     await personalInfo.locator('.text-validated').fill('5555 5555 5555 5555');
 
-    await personalInfo.locator('.form__cc select').first().selectOption('05');
-    await personalInfo.locator('.form__cc select').last().selectOption('15');
+    await personalInfo.locator('select.ddl').first().selectOption('05');
+   await personalInfo.locator('select.ddl').last().selectOption('15');
 
     //CVV CODE
-    await page.locator('.form__cc .input').nth(1).fill('123');
+    await personalInfo.locator('[type="text"]').nth(1).fill('123');
 
     //Name on card
-    await page.locator('.form__cc .input').nth(2).fill('Samantha Green');
+    await personalInfo.locator('[type="text"]').nth(2).fill('Samantha Green');
 
     //Coupon
-    await page.locator('.form__cc .input').nth(3).fill('RahulShettyAcademy');
+   // await personalInfo.locator('[type="text"]').nth(3).fill('RahulShettyAcademy');
     //Apply Coupon btn
-    await page.click('.form__cc [type="submit"]');
+    //await personalInfo.getByRole('button', {name : 'Apply Coupon'}).click();
 
 
     //Shipping information
     let userInfo = await page.locator('.user__name');
-    let userMail = userInfo.locator('.text-validated').textContent();
+    let userMail = await userInfo.locator('input').first().inputValue();
+
+    
 //email
-expect(userMail).toEqual(email);
+await expect(userMail).toEqual(email);
     
 
-// click on place order btn
-
     await page.locator('[placeholder*="Country"]').pressSequentially('ind');
-    const dropdown = await page.locator('.ta-results');
+    let dropdown = await page.locator('.ta-results');
     await dropdown.waitFor();
+      
 
     const numOfButtons = await dropdown.locator('button').count();
 
@@ -83,6 +85,21 @@ expect(userMail).toEqual(email);
             break;
         }
     }
+
+    // click on place order btn
+await page.click('text =Place Order');
+
+//get h1 text
+let msg = await page.locator('h1').first().textContent();
+
+expect(msg).toEqual(test);
+
+let finalPageTitle = await page.locator('.box').first();
+let orderIdRow = await finalPageTitle.locator('tr').last();
+let orderId = await orderIdRow.locator('td').textContent();
+
+console.log(orderId);
+
 
     //how to take screenshots on the entire page in playwright
     await page.screenshot({ path: 'screenshot.png' });
