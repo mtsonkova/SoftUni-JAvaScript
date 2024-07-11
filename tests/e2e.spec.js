@@ -136,7 +136,12 @@ await expect(orderIdOrderSummary).toEqual(orderId);
 
 
 
+//click on visible locator with playwright
+//await page.locator('locator-here:visible').click();
 
+
+//switch to frame in playwright
+//const framePage = await page.frameLocator('framelocatorHere');
 
     //how to take screenshots on the entire page in playwright
    // await page.screenshot({ path: 'screenshot.png' });
