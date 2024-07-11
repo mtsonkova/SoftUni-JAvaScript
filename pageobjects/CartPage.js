@@ -10,7 +10,7 @@ class CartPage{
 
     async clickCheckoutBtn() {
         await this.checkoutBtn.click();
-        return await page.locator('.form__cc');
+        
     }
 
 }
