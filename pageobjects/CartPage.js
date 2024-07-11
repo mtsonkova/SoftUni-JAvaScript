@@ -5,7 +5,7 @@ class CartPage{
     }    
 
     async isProductVisibleInCart(productName) {
-        return await this.page.locator('h3:has-text(productName)').isVisible();
+        return await this.page.locator(`h3:has-text("${productName}")`).isVisible();
     }
 
     async clickCheckoutBtn() {

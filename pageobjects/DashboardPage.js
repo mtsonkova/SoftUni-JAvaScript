@@ -12,16 +12,17 @@ class DashboardPage {
         return productsTitles;
        }
 
-    async addProductToCart(productName) {
+    async addProductToCart(product) {
+        let productsTitles = await this.getProductsTitles();
         let size = await this.products.count();
-       
+               
         for(let i = 0; i< size; i++) {
             let currentProductName = await this.products.nth(i).locator('b').textContent();
-            if(currentProductName === productName) {
-                await this.products.nth(i).locator('text=Add To Cart').click();
+            if(currentProductName === product) {
+                await this.products.nth(i).locator('text= Add To Cart').click();
                 break;
             }
-        }
+        }     
 
     }
 

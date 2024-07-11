@@ -38,7 +38,7 @@ class CheckoutPage {
     }
 
     async selectCountry(countryName) {
-        let subStr = countryName.substring(0, 3).toLowerCase();
+        let subStr = countryName.substring(0, 3);
 
         await this.countryPlaceholder.pressSequentially(subStr);
         await this.dropdown.waitFor();
@@ -57,7 +57,7 @@ class CheckoutPage {
         await this.placeOrderBtn.click();
     }
 
-    async submitCheckoutPageWithValidData(cardNumber, monthParam, dayParam, cvvCode, cardName, countryName) {
+    async fillCheckoutPageWithValidData(cardNumber, monthParam, dayParam, cvvCode, cardName, countryName) {
         await this.cardNumber.fill(cardNumber);
 
         let month = await this.expiryDate.first();
@@ -71,20 +71,21 @@ class CheckoutPage {
         let namePlaceholder = await this.textFields.nth(2);
         await namePlaceholder.fill(cardName);
 
-        let subStr = countryName.substring(0, 3).toLowerCase();
+        let subStr = countryName.substring(0, 3);
 
         await this.countryPlaceholder.pressSequentially(subStr);
         await this.dropdown.waitFor();
         let numOfButtons = await this.buttons.count();
 
         for (let i = 0; i < numOfButtons; i++) {
-            if (await this.buttons.nth(i).textContent() === countryName) {
+            let currentCountry = await this.buttons.nth(i).textContent();
+          
+            if (currentCountry.trim() === countryName) {
                 await this.buttons.nth(i).click();
                 break;
             }
-        }
-
-        await this.placeOrderBtn.click();
+        } 
+       
     }
 
 }

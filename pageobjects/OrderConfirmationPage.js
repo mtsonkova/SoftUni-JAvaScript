@@ -1,7 +1,7 @@
 class OrderConfirmationPage {
     constructor(page) {
         this.page = page;
-        this.msg = page.locator('h1');
+        this.msg = page.locator('h1.hero-primary');
         this.finalPageTitleData = page.locator('.box');
         this.navButtons = page.locator('button.btn-custom');
         this.th = page.locator('tbody tr th');
@@ -9,7 +9,8 @@ class OrderConfirmationPage {
     }
 
     async getMsgText() {
-        return await this.msg.first().textContent();
+       
+        return await this.msg.textContent();
     }
 
     async getOrderId() {

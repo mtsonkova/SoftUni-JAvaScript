@@ -5,12 +5,13 @@ class OrderSummaryPage {
         this.orderIdSummary = page.locator('div.col-text');
     }
 
-    async getOrderSumaryHeader() {
-        return await this.title.textContent();
+    async getOrderSummaryHeader() {
+       
+        return await this.title.first().textContent();
     }
 
     async getOrderSummaryId() {
-        return this.getOrderSummaryId.first().textContent();
+        return this.orderIdSummary.first().textContent();
     }   
   
 }
