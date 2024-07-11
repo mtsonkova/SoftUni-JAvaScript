@@ -132,10 +132,6 @@ let orderIdOrderSummary = await page.locator('div.col-text').first().textContent
 
 await expect(orderIdOrderSummary).toEqual(orderId);
 
-
-
-
-
 //click on visible locator with playwright
 //await page.locator('locator-here:visible').click();
 
