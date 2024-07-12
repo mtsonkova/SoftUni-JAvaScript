@@ -4,13 +4,19 @@
   "description": "This repository contains the source code from the Playwright udemy course.",
   "main": "index.js",
   "scripts": {
-    "test" : "npx playwright test /tests/clientAppPageObject.spec.js --reporter=html"   
+    "test": "npx playwright test /tests/clientAppPageObject.spec.js --reporter=html",
+    "smoke": "",
+    "regression": "",
+    "e2e": "",
+    "webTests": "",
+    "APITests": ""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.44.1",
-    "@types/node": "^20.14.0"
+    "@types/node": "^20.14.0",
+    "allure-playwright": "^3.0.0-beta.6"
   }
 }
