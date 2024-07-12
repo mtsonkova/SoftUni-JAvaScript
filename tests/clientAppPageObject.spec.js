@@ -1,11 +1,7 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pageobjects/LoginPage');
-const { DashboardPage } = require('../pageobjects/DashboardPage');
-const { CartPage } = require('../pageobjects/CartPage');
-const { CheckoutPage } = require('../pageobjects/CheckoutPage');
-const { OrderConfirmationPage } = require('../pageobjects/OrderConfirmationPage');
-const { OrderSummaryPage } = require('../pageobjects/OrderSummaryPage');
+const { POManager } = require('../pageobjects/POManager');
+
 
 const host = 'https://rahulshettyacademy.com/client';
 const email = 'samgreen@qa.com';
@@ -15,43 +11,48 @@ const productName = 'ZARA COAT 3';
 const text = " Thankyou for the order. "
 
 test('Purchase one product', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+    const poManager = new POManager(page);
+    const loginPage = poManager.getLoginPage();
     await loginPage.goToUrl(host);
     await loginPage.validLogin(email, password);
     await page.waitForLoadState('networkidle');
 
     //add product to shoping cart
-    const dashboardPage = new DashboardPage(page);
+    const dashboardPage =poManager.getDashboardPage();
     await dashboardPage.addProductToCart(productName);
     await dashboardPage.clickOnCartBtn();
 
 
-    const cartPage = new CartPage(page);
+    const cartPage = poManager.getCartPage();
 
     const isElementPresentInCart = await cartPage.isProductVisibleInCart(productName);
 
     await expect(isElementPresentInCart).toBeTruthy();
     await cartPage.clickCheckoutBtn();
 
-    const checkoutPage = new CheckoutPage(page);
+    const checkoutPage = poManager.getCheckoutPage();
     await checkoutPage.fillCheckoutPageWithValidData('5555 5555 5555 5555', '05', '15', '123', 'Samantha Green', 'Indonesia');
    await checkoutPage.clickPlaceOrderBtn();
 
-    const orderConfirmationPage = new OrderConfirmationPage(page);
+    const orderConfirmationPage = poManager.getOrderConfirmationPage()
     let msg = await orderConfirmationPage.getMsgText();
 
     await expect(msg).toEqual(text);
 
     let orderId = await orderConfirmationPage.getOrderId();
-    await orderConfirmationPage.clickOnViewOrderBtn(orderId);
+    orderConfirmationPage.clickOnOrdersBtn();
 
-    let orderSummaryPage = new OrderSummaryPage(page);
-   //let title = await orderSummaryPage.getOrderSummaryHeader();
-    
-    //await expect(title).toEqual(' order summary ');
+    let ordersPage = poManager.getOrdersPage();
+    ordersPage.clickOnViewOrderBtn(orderId);
+
+    let orderSummaryPage = poManager.getOrderSummaryPage()
+   
+    let title = await orderSummaryPage.getOrderSummaryHeader();
+    console.log(title);
+    await expect(title).toEqual(' order summary ');
 
     let orderIdSummary = await orderSummaryPage.getOrderSummaryId();
-
+    console.log(orderIdSummary);
     await expect(orderIdSummary).toEqual(orderId);
 
 });
