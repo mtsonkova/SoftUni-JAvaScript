@@ -1,8 +1,9 @@
-{
+[
+    {
+    "id" : 1,
     "host" : "https://rahulshettyacademy.com/client",
     "email" : "samgreen@qa.com",
     "password" : "Qa_Password1",
-    "expectedProductsTitles" : ["ZARA COAT 3", "ADIDAS ORIGINAL", "IPHONE 13 PRO"],
     "productName" : "ZARA COAT 3",
     "text" : " Thankyou for the order. ",
     "creditCardNumber" : "5555 5555 5555 5555",
@@ -11,4 +12,36 @@
     "cvvCode" : "123",
     "cardOwnerName" : "Samantha Green",
     "country" : "Canada"
+},
+
+{
+    "id" : 2,
+    "host" : "https://rahulshettyacademy.com/client",
+    "email" : "samgreen@qa.com",
+    "password" : "Qa_Password1",
+    "productName" : "ADIDAS ORIGINAL",
+    "text" : " Thankyou for the order. ",
+    "creditCardNumber" : "4444 2234 2314 5879",
+    "month" : "09",
+    "day" : "16",
+    "cvvCode" : "461",
+    "cardOwnerName" : "Sandra Guilmore",
+    "country" : "United Kingdom"
+},
+
+{
+    "id" : 3,
+    "host" : "https://rahulshettyacademy.com/client",
+    "email" : "samgreen@qa.com",
+    "password" : "Qa_Password1",
+    "productName" : "IPHONE 13 PRO",
+    "text" : " Thankyou for the order. ",
+    "creditCardNumber" : "6234 8217 6514 3324",
+    "month" : "01",
+    "day" : "19",
+    "cvvCode" : "225",
+    "cardOwnerName" : "Simon Green",
+    "country" : "Cuba"
 }
+
+]
