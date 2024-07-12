@@ -1,14 +1,14 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 const { POManager } = require('../pageobjects/POManager');
+const dataSet = JSON.parse(JSON.stringify(require("../testdata/clientAppPageObjects.json")));
 
 
-const host = 'https://rahulshettyacademy.com/client';
-const email = 'samgreen@qa.com';
-const password = 'Qa_Password1';
-const expectedProductsTitles = ['ZARA COAT 3', 'ADIDAS ORIGINAL', 'IPHONE 13 PRO'];
-const productName = 'ZARA COAT 3';
-const text = " Thankyou for the order. "
+const host = dataSet.host;
+const email = dataSet.email;
+const password = dataSet.password;
+const productName = dataSet.productName;
+const text = dataSet.text;
 
 test('Purchase one product', async ({ page }) => {
     const poManager = new POManager(page);
@@ -31,8 +31,8 @@ test('Purchase one product', async ({ page }) => {
     await cartPage.clickCheckoutBtn();
 
     const checkoutPage = poManager.getCheckoutPage();
-    await checkoutPage.fillCheckoutPageWithValidData('5555 5555 5555 5555', '05', '15', '123', 'Samantha Green', 'Indonesia');
-    await checkoutPage.clickPlaceOrderBtn();
+    await checkoutPage.fillCheckoutPageWithValidData(dataSet.creditCardNumber, dataSet.month, dataSet.day, dataSet.cvvCode, dataSet.cardOwnerName, dataSet.country); 
+     await checkoutPage.clickPlaceOrderBtn();
 
     const orderConfirmationPage = poManager.getOrderConfirmationPage()
     let msg = await orderConfirmationPage.getMsgText();
@@ -41,7 +41,7 @@ test('Purchase one product', async ({ page }) => {
 
     let orderId = await orderConfirmationPage.getOrderId();
     await orderConfirmationPage.clickOnOrdersBtn();
-    //await page.waitForURL('https://rahulshettyacademy.com/client/dashboard/myorders');
+   
     let ordersPage = poManager.getOrdersPage();
     await ordersPage.clickOnViewOrderBtn(orderId);
 
