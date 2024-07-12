@@ -6,11 +6,11 @@ class OrderSummaryPage {
     }
 
     async getOrderSummaryHeader() {
-       return await this.title.textContent();
+       return this.title.textContent();
     }
 
     async getOrderSummaryId() {
-       return this.orderIdSummary;
+       return this.orderIdSummary.textContent();
        
     }   
   

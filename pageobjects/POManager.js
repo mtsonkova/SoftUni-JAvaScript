@@ -3,8 +3,8 @@ const {DashboardPage} = require('./DashboardPage');
 const {CartPage} = require('./CartPage');
 const {CheckoutPage} = require('./CheckoutPage');
 const {OrderConfirmationPage} = require('./OrderConfirmationPage');
-const {OrderSummaryPage} = require('./OrderSummaryPage');
 const {OrdersPage} = require('./OrdersPage');
+const {OrderSummaryPage} = require('./OrderSummaryPage');
 
 class POManager{
     constructor(page) {
@@ -15,7 +15,7 @@ class POManager{
         this.checkoutPage = new CheckoutPage(this.page);
         this.orderConfirmationPage = new OrderConfirmationPage(this.page);
         this.ordersPage = new OrdersPage(this.page);
-        this.rderSummaryPage = new OrderSummaryPage(this.page);
+        this.orderSummaryPage = new OrderSummaryPage(this.page);
     }
 
     getLoginPage() {
