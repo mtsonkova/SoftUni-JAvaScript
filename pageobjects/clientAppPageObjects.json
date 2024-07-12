@@ -1,0 +1,14 @@
+{
+    "host" : "https://rahulshettyacademy.com/client",
+    "email" : "samgreen@qa.com",
+    "password" : "Qa_Password1",
+    "expectedProductsTitles" : ["ZARA COAT 3", "ADIDAS ORIGINAL", "IPHONE 13 PRO"],
+    "productName" : "ZARA COAT 3",
+    "text" : " Thankyou for the order. ",
+    "creditCardNumber" : "5555 5555 5555 5555",
+    "month" : "05",
+    "day" : "15",
+    "cvvCode" : "123",
+    "cardOwnerName" : "Samantha Green",
+    "country" : "Canada"
+}
