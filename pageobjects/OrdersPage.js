@@ -9,6 +9,7 @@ class OrdersPage {
     async clickOnViewOrderBtn(orderId) {
       
         let hasOrderId = false;
+        let currentRow = 0;
 
         let currentIndex = 0;
         await this.th.first().waitFor();
@@ -24,7 +25,8 @@ class OrdersPage {
     }
 
     if (hasOrderId) {
-        await this.viewBtn.click()
+        let currentViewBtn = this.viewBtn.nth(currentIndex);
+        await currentViewBtn.click();
     } else {
         console.log('No such order id')
     }
