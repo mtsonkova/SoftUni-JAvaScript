@@ -48,11 +48,10 @@ test('Purchase one product', async ({ page }) => {
     let orderSummaryPage = poManager.getOrderSummaryPage();
 
     let title = await orderSummaryPage.getOrderSummaryHeader();
-    console.log(title);
+   
     await expect(title).toEqual(' order summary ');
 
     let orderIdSummary = await orderSummaryPage.getOrderSummaryId();
-    console.log(orderIdSummary);
     await expect(orderIdSummary).toEqual(orderId);
 
 });
