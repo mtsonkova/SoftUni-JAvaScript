@@ -42,8 +42,29 @@ module.exports = defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'chrome',
+      use: { 
+        ...devices['Desktop Chrome'],
+        browserName: 'chromium',
+        headless: true, // false -> will open the browser
+        screenshot : 'only-on-failure',
+       trace: 'retain-on-failure', //on, off, retain-on-failure 
+       ...devices['Galaxy S III'],
+       ignoreHTTPSErrors:true,
+       //viewport: {width: 720, height:520}
+       video :'retain-on-failure',
+      }
+    },
+
+    {
+      name: 'firefox',
+      use: { 
+        ...devices['Desktop Firefox'],
+        browserName: 'firefox',
+        headless: false, // false -> will open the browser
+        screenshot : 'only-on-failure',
+        trace: 'retain-on-failure', //on, off, retain-on-failure 
+    },
     },
 
     /*
