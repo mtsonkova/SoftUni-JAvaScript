@@ -2,10 +2,7 @@ class OrderConfirmationPage {
     constructor(page) {
         this.page = page;
         this.msg = page.locator('h1.hero-primary');
-        this.finalPageTitleData = page.locator('.box');
-        this.navButtons = page.locator('button.btn-custom');
-        this.th = page.locator('tbody tr th');
-        this.tr = page.locator('tbody tr');
+        this.finalPageTitleData = page.locator('.box');        
         this.ordersBtn = page.getByRole('button', {name: "  ORDERS"});
     }
 

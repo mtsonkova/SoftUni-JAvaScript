@@ -18,7 +18,7 @@ test('Purchase one product', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     //add product to shoping cart
-    const dashboardPage =poManager.getDashboardPage();
+    const dashboardPage = poManager.getDashboardPage();
     await dashboardPage.addProductToCart(productName);
     await dashboardPage.clickOnCartBtn();
 
@@ -32,7 +32,7 @@ test('Purchase one product', async ({ page }) => {
 
     const checkoutPage = poManager.getCheckoutPage();
     await checkoutPage.fillCheckoutPageWithValidData('5555 5555 5555 5555', '05', '15', '123', 'Samantha Green', 'Indonesia');
-   await checkoutPage.clickPlaceOrderBtn();
+    await checkoutPage.clickPlaceOrderBtn();
 
     const orderConfirmationPage = poManager.getOrderConfirmationPage()
     let msg = await orderConfirmationPage.getMsgText();
@@ -40,13 +40,13 @@ test('Purchase one product', async ({ page }) => {
     await expect(msg).toEqual(text);
 
     let orderId = await orderConfirmationPage.getOrderId();
-    orderConfirmationPage.clickOnOrdersBtn();
-
+    await orderConfirmationPage.clickOnOrdersBtn();
+    //await page.waitForURL('https://rahulshettyacademy.com/client/dashboard/myorders');
     let ordersPage = poManager.getOrdersPage();
-    ordersPage.clickOnViewOrderBtn(orderId);
+    await ordersPage.clickOnViewOrderBtn(orderId);
 
     let orderSummaryPage = poManager.getOrderSummaryPage()
-   
+
     let title = await orderSummaryPage.getOrderSummaryHeader();
     console.log(title);
     await expect(title).toEqual(' order summary ');
