@@ -42,7 +42,7 @@ class POManager{
     }
 
     getOrderSummaryPage() {
-        return this.OrderSummaryPage;
+        return this.orderSummaryPage;
     }
 }
 

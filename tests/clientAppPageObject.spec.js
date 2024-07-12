@@ -45,7 +45,7 @@ test('Purchase one product', async ({ page }) => {
     let ordersPage = poManager.getOrdersPage();
     await ordersPage.clickOnViewOrderBtn(orderId);
 
-    let orderSummaryPage = poManager.getOrderSummaryPage()
+    let orderSummaryPage = poManager.getOrderSummaryPage();
 
     let title = await orderSummaryPage.getOrderSummaryHeader();
     console.log(title);
