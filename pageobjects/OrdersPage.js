@@ -20,16 +20,15 @@ class OrdersPage {
                 hasOrderId = true;
                 currentIndex = i;
                 break;
-            }
-
-            if (hasOrderId) {
-                await this.viewBtn.click()
-            } else {
-                console.log('No such order id')
-            }
-        }
-
+            }    
     }
+
+    if (hasOrderId) {
+        await this.viewBtn.click()
+    } else {
+        console.log('No such order id')
+    }
+}
 }
 
 module.exports = { OrdersPage };
